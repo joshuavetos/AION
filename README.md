@@ -1,227 +1,141 @@
-# AION
+<div align="center">
 
-## AION Desktop Genesis Prompt (Codex-Optimized)
+PromptForge
 
-Copy/paste the block below into Cursor / Windsurf / Codex to scaffold the repository in a governance-compliant way.
+The Epistemic Integrity Engine for Generative AI
 
-```
-# MISSION: Scaffold the AION Desktop (Tessrax Prime) Repository
+<p align="center">
+<b>PromptForge (formerly Project Slop Drop)</b> is a forensic prompt engineering environment designed to eliminate hallucination, enforce output schemas, and provide cryptographic assurance for AI interactions.
+</p>
 
-You are a Senior Solutions Architect operating under Tessrax Governance Law.
-Your task is to generate a fully scaffolded, runnable codebase for **AION Desktop (Tessrax Prime)**, also known as **The Epistemic Firewall**.
+Documentation | Architecture | Governance Manifest
 
-You MUST follow these rules:
+</div>
 
-- **AEP-001 (Auto-Executability)**: The repo MUST contain a working `scripts/bootstrap.py` that:
-  1. Creates a Python 3.11 venv
-  2. Installs daemon dependencies
-  3. Installs Electron/Vue dependencies
-  4. Prints: `SYSTEM READY. RUN: npm run dev`
+🏛️ Executive Summary
 
-- **RVC-001 (Runtime Verification)**:  
-  The daemon MUST self-test on startup (`--self-test`) before handling any /analyze requests.
+In the era of nondeterministic AI models, the "garbage in, garbage out" paradigm has evolved into "ambiguity in, hallucination out."
 
-- **EAC-001 (Evidence Alignment)**:  
-  Ingestion MUST preserve the original file hash and embed it into the LedgerReceipt.
+PromptForge is not a prompt optimizer; it is a Prompt Governance Engine. It applies the Tessrax Epistemic Integrity Framework to raw user input ("slop"), metabolizing it into rigorous, constraint-hardened instruction sets ("artifacts") that guarantee specific model behaviors.
 
----
+Unlike standard "rewrite" tools which often introduce new ambiguities, PromptForge uses a deterministic Metabolism Engine to detect and resolve:
 
-## 1. DIRECTORY STRUCTURE — FOLLOW EXACTLY
+Unfalsifiable Instructions (e.g., "Write something creative")
 
-Create this exact file tree:
+Schema Drift (Missing output format definitions)
 
-```text
-aion-desktop/
-├── app/
-│   ├── src/main/
-│   │   ├── app.ts
-│   │   ├── menu.ts
-│   │   └── ipc-handlers.ts
-│   ├── src/renderer/
-│   │   ├── App.vue
-│   │   ├── main.ts
-│   │   └── components/
-│   ├── package.json
-│   └── vite.config.ts
-│
-├── aiond/
-│   ├── server/
-│   │   ├── aiond.py
-│   │   └── audit_engine.py
-│   ├── protocol/
-│   │   ├── request.py
-│   │   └── response.py
-│   └── requirements.txt
-│
-├── proceduralist/
-│   ├── crawler.py
-│   └── hash_engine.py
-│
-├── tessrax/
-│   ├── governance/
-│   │   ├── kernel.py
-│   │   └── scoring.py
-│   ├── metabolism/
-│   │   └── contradiction_finder.py
-│   └── metrics/
-│       └── epistemic_health.py
-│
-├── ledger/
-│   ├── merkle_engine.py
-│   └── signer.py
-│
-├── scripts/
-│   └── bootstrap.py
-│
-└── README.md
-```
+Context Leakage (Implicit assumptions not grounded in data)
 
-NO DEVIATIONS.
-NO EXTRA DIRECTORIES.
-NO MISSING FILES.
+Logical Contradictions (Conflicting operational constraints)
 
----
+Every refined prompt is issued with a Cryptographic Integrity Receipt, proving that the input meets the AEP-001 (Auto-Executability Protocol) standard.
 
-2. IMPLEMENTATION REQUIREMENTS
+🏗️ System Architecture
 
-A. AION Daemon (aiond/server/aiond.py)
+PromptForge operates on a split-stack architecture designed for maximum privacy (local ingestion) and high-assurance verification.
 
-Implement a FastAPI server that:
-   •   Runs on localhost:7777
-   •   Implements:
-POST /analyze → accepts {"path": "/abs/path/to/file"}
-   •   Pipeline for /analyze:
-1.Proceduralist → extract + canonicalize text
-2.Compute file hash (EAC-001)
-3.Tessrax → contradiction detection + entropy + integrity
-4.Ledger → Merkle root + Ed25519 signing
-   •   Returns JSON:
+graph TD
+    User[User Input (Raw Slop)] --> Ingest[Ingestion Engine]
+    Ingest --> Metabolism[Metabolism Engine]
+    Metabolism -->|Detect Smells| ContradictionRecords
+    ContradictionRecords --> Governance[Governance Kernel]
+    Governance -->|Enforce Iron Laws| RefinedArtifact[Governed Prompt]
+    Governance -->|Sign| Ledger[Trust Ledger]
+    Ledger --> Receipt[Integrity Receipt]
+    RefinedArtifact --> Output[Production Output]
 
-{
-  "integrity_score": 87,
-  "entropy": 0.42,
-  "contradictions": [...],
-  "receipt": {
-    "hash": "...",
-    "merkle_root": "...",
-    "signature": "..."
-  }
-}
 
-Daemon MUST accept --self-test:
-   •   Verify Ed25519 keypair exists
-   •   Verify Merkle engine functions
-   •   Verify Proceduralist hash engine matches Python hashlib
-   •   If any check fails → exit with code 1
+Core Subsystems
 
----
+Module
 
-B. Proceduralist
+Designation
 
-crawler.py:
-   •   Accept file path
-   •   Read file
-   •   Extract raw text (plain .txt only for now)
-   •   Return text
+Function
 
-hash_engine.py:
-   •   SHA-256 of file contents
-   •   Return hex digest
+Ingestion Engine
 
----
+core.ingest
 
-C. Tessrax Metrics
+Sanitizes input, strips PII, and identifies Target Model constraints (GPT-4, Claude 3, Llama).
 
-tessrax/metrics/epistemic_health.py:
+Metabolism Engine
 
-Implement:
+core.metabolism
 
-def calculate_entropy(contradictions: list[str]) -> float:
+Detects "Prompt Smells" (ambiguity, subjectivity, open loops) and converts them into structured logic.
 
-Use Shannon entropy:
+Governance Kernel
 
-entropy = - Σ p_i * log2(p_i)
+core.governance
 
-calculate_integrity(context):
+The enforcement layer. Applies Iron Laws (e.g., Output must be JSON, Reasoning must precede Answer).
 
-A simple rule:
+Trust Ledger
 
-integrity = max(0, 100 - (len(contradictions) * 5))
+core.ledger
 
----
+Generates a deterministic SHA-256 hash of the prompt and its integrity score, creating an auditable paper trail.
 
-D. Ledger
+🛡️ Governance & Compliance
 
-ledger/signer.py:
-   •   On first run, generate Ed25519 keypair:
-      •   Save to ~/.aion/keys/private.key
-      •   Save public key to ~/.aion/keys/public.key
-   •   Implement:
+PromptForge is built upon the Tessrax Governance Specifications. All code and outputs adhere to the following strictures:
 
-def sign(data: bytes) -> str:
+AEP-001: Auto-Executability Protocol
 
-Return base64 signature.
+Definition: A prompt must be executable by an AI model without requiring human intuition to resolve ambiguity.
 
-ledger/merkle_engine.py:
-   •   Build merkle root from:
-      •   file hash
-      •   sorted contradiction list
+Enforcement: The kernel rejects any instruction set that lacks explicit output formatting (e.g., JSON, Markdown Table, SQL) or clear termination conditions.
 
----
+RVC-001: Runtime Verification Clause
 
-E. UI Layer (Electron + Vue 3)
+Definition: The system must verify that the prompt's constraints are logically consistent before execution.
 
-App.vue MUST include:
-   •   Drag-and-drop zone
-   •   On drop: send file path → IPC → Daemon
-   •   Display:
-      •   Large circular Integrity Score
-      •   Entropy bar (green → yellow → red)
-      •   Contradiction List
-      •   “Export Forensic Receipt” button (just downloads JSON for now)
+Enforcement: Contradiction detection algorithms scan for conflicting directives (e.g., "Be concise" vs. "Explain in detail") and force resolution.
 
-Design aesthetic:
-   •   Dark mode
-   •   Black / white / red palette
-   •   High-trust, minimalistic
+EAC-001: Evidence Alignment Clause
 
----
+Definition: All generative outputs must be grounded in provided context.
 
-F. Glue Script (scripts/bootstrap.py)
+Enforcement: The system injects "Anti-Confabulation" guardrails, forcing the model to emit INSUFFICIENT_DATA tokens rather than hallucinating facts.
 
-Must:
-1.Check Python 3.11 exists
-2.Create venv: .venv
-3.Install Python dependencies
-4.Run npm install in app/
-5.Print:
+🚀 Installation & Deployment
 
-SYSTEM READY. RUN: npm run dev
+PromptForge allows for rapid, deterministic deployment via the bootstrap.py orchestrator.
 
-NO placeholder text.
-Script must work as-is.
+Prerequisites
 
----
+Python: 3.11+ (Strict Requirement)
 
-3. EXECUTION ORDER
+Node.js: 18+ (LTS)
 
-Codex MUST scaffold in this order:
-1.Create directories
-2.Generate Python backend files
-3.Generate Tessrax + Proceduralist + Ledger core
-4.Generate Electron/Vue frontend
-5.Generate bootstrap script
-6.Generate README
-```
+OS: Linux, macOS, or Windows (WSL2 recommended)
 
----
+Quick Start (The "Bootstrap" Method)
 
-**User-provided custom instructions**
+We provide a single-command deployment script that creates the virtual environment, installs dependencies, builds the frontend, and links the local daemon.
 
-- RULE 1 — No Imaginary Stuff
-- RULE 2 — Full Executability Guarantee
-- RULE 3 — Allowed to Create Files, But Only When Told
-- RULE 4 — No Silent Fixups
-- RULE 5 — Produce Real Code Only
+# 1. Clone the repository
+git clone [https://github.com/your-org/slop-drop.git](https://github.com/your-org/slop-drop.git) promptforge
+cd promptforge
 
-```Cannot generate executable code without clarification: <specific missing detail>```
+# 2. Run the Bootstrap Orchestrator
+python scripts/bootstrap.py
+
+
+Manual Start
+
+If you prefer to run services individually:
+
+Backend Daemon (Python/FastAPI):
+
+cd backend
+source venv/bin/activate
+python -m server.main
+# Server active at [http://127.0.0.1:7777](http://127.0.0.1:7777)
+
+
+Frontend Interface (Electron/Vue):
+
+cd app
+npm run dev
