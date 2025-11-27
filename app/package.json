@@ -1,0 +1,24 @@
+{
+  "name": "aion-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/main/app.ts",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:electron": "cross-env NODE_ENV=development electron -r ts-node/register src/main/app.ts"
+  },
+  "dependencies": {
+    "electron": "28.2.0",
+    "vue": "3.4.21"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.30",
+    "@vitejs/plugin-vue": "5.0.4",
+    "concurrently": "8.2.2",
+    "cross-env": "7.0.3",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.3",
+    "vite": "5.2.2"
+  }
+}
