@@ -139,3 +139,43 @@ Frontend Interface (Electron/Vue):
 
 cd app
 npm run dev
+📖 Usage Guide
+The "Slop Bucket" Workflow
+
+Ingest: Paste your raw request or upload context files into the Slop Bucket (Left Panel).
+
+Example Slop: "Write a blog post about AI that isn't boring."
+
+Metabolize: Click Refine & Verify.
+
+The system detects ambiguity ("boring" is subjective) and missing schemas ("blog post" structure undefined).
+
+Review: The Governance Kernel generates a hardened artifact.
+
+Refined Artifact: Defines persona, tone parameters, specific structural requirements (H2 tags), and anti-hallucination constraints.
+
+Audit: Review the Integrity Score and Audit Log to see exactly what rules were applied.
+
+Export: Copy the JSON-formatted superprompt or download the signed Forensic Receipt.
+
+🔮 Roadmap
+v1.1 (The Team Update): Shared Governance Libraries for enterprise teams.
+
+v1.2 (The Agent Update): API access for integrating PromptForge as a middleware layer in autonomous agent swarms.
+
+v2.0 (The Federation Update): Cross-node consensus on prompt safety using the Tessrax Federation Protocol.
+
+🤝 Contributing
+We welcome contributions that adhere to the Tessrax Integrity Standards.
+
+Read CONTRIBUTING.md.
+
+Ensure all PRs include a Governance Impact Statement.
+
+Run scripts/verify_integrity.py before submitting.
+
+<p align="center"> <b>PromptForge</b> is a product of the <b>Tessrax Ecosystem</b>.
+
+<i>"Silence is Honesty. Verification is Truth."</i>
+
+</p>
