@@ -1,181 +1,32 @@
-<div align="center">
-
-PromptForge
-
-The Epistemic Integrity Engine for Generative AI
-
-<p align="center">
-<b>PromptForge (formerly Project Slop Drop)</b> is a forensic prompt engineering environment designed to eliminate hallucination, enforce output schemas, and provide cryptographic assurance for AI interactions.
-</p>
-
-Documentation | Architecture | Governance Manifest
-
-</div>
-
-🏛️ Executive Summary
-
-In the era of nondeterministic AI models, the "garbage in, garbage out" paradigm has evolved into "ambiguity in, hallucination out."
-
-PromptForge is not a prompt optimizer; it is a Prompt Governance Engine. It applies the Tessrax Epistemic Integrity Framework to raw user input ("slop"), metabolizing it into rigorous, constraint-hardened instruction sets ("artifacts") that guarantee specific model behaviors.
-
-Unlike standard "rewrite" tools which often introduce new ambiguities, PromptForge uses a deterministic Metabolism Engine to detect and resolve:
-
-Unfalsifiable Instructions (e.g., "Write something creative")
-
-Schema Drift (Missing output format definitions)
-
-Context Leakage (Implicit assumptions not grounded in data)
-
-Logical Contradictions (Conflicting operational constraints)
-
-Every refined prompt is issued with a Cryptographic Integrity Receipt, proving that the input meets the AEP-001 (Auto-Executability Protocol) standard.
-
-🏗️ System Architecture
-
-PromptForge operates on a split-stack architecture designed for maximum privacy (local ingestion) and high-assurance verification.
-
-graph TD
-    User[User Input (Raw Slop)] --> Ingest[Ingestion Engine]
-    Ingest --> Metabolism[Metabolism Engine]
-    Metabolism -->|Detect Smells| ContradictionRecords
-    ContradictionRecords --> Governance[Governance Kernel]
-    Governance -->|Enforce Iron Laws| RefinedArtifact[Governed Prompt]
-    Governance -->|Sign| Ledger[Trust Ledger]
-    Ledger --> Receipt[Integrity Receipt]
-    RefinedArtifact --> Output[Production Output]
-
-
-Core Subsystems
-
-Module
-
-Designation
-
-Function
-
-Ingestion Engine
-
-core.ingest
-
-Sanitizes input, strips PII, and identifies Target Model constraints (GPT-4, Claude 3, Llama).
-
-Metabolism Engine
-
-core.metabolism
-
-Detects "Prompt Smells" (ambiguity, subjectivity, open loops) and converts them into structured logic.
-
-Governance Kernel
-
-core.governance
-
-The enforcement layer. Applies Iron Laws (e.g., Output must be JSON, Reasoning must precede Answer).
-
-Trust Ledger
-
-core.ledger
-
-Generates a deterministic SHA-256 hash of the prompt and its integrity score, creating an auditable paper trail.
-
-🛡️ Governance & Compliance
-
-PromptForge is built upon the Tessrax Governance Specifications. All code and outputs adhere to the following strictures:
-
-AEP-001: Auto-Executability Protocol
-
-Definition: A prompt must be executable by an AI model without requiring human intuition to resolve ambiguity.
-
-Enforcement: The kernel rejects any instruction set that lacks explicit output formatting (e.g., JSON, Markdown Table, SQL) or clear termination conditions.
-
-RVC-001: Runtime Verification Clause
-
-Definition: The system must verify that the prompt's constraints are logically consistent before execution.
-
-Enforcement: Contradiction detection algorithms scan for conflicting directives (e.g., "Be concise" vs. "Explain in detail") and force resolution.
-
-EAC-001: Evidence Alignment Clause
-
-Definition: All generative outputs must be grounded in provided context.
-
-Enforcement: The system injects "Anti-Confabulation" guardrails, forcing the model to emit INSUFFICIENT_DATA tokens rather than hallucinating facts.
-
-🚀 Installation & Deployment
-
-PromptForge allows for rapid, deterministic deployment via the bootstrap.py orchestrator.
-
-Prerequisites
-
-Python: 3.11+ (Strict Requirement)
-
-Node.js: 18+ (LTS)
-
-OS: Linux, macOS, or Windows (WSL2 recommended)
-
-Quick Start (The "Bootstrap" Method)
-
-We provide a single-command deployment script that creates the virtual environment, installs dependencies, builds the frontend, and links the local daemon.
-
-# 1. Clone the repository
-git clone [https://github.com/your-org/slop-drop.git](https://github.com/your-org/slop-drop.git) promptforge
-cd promptforge
-
-# 2. Run the Bootstrap Orchestrator
-python scripts/bootstrap.py
-
-
-Manual Start
-
-If you prefer to run services individually:
-
-Backend Daemon (Python/FastAPI):
-
-cd backend
-source venv/bin/activate
-python -m server.main
-# Server active at [http://127.0.0.1:7777](http://127.0.0.1:7777)
-
-
-Frontend Interface (Electron/Vue):
-
-cd app
-npm run dev
-📖 Usage Guide
-The "Slop Bucket" Workflow
-
-Ingest: Paste your raw request or upload context files into the Slop Bucket (Left Panel).
-
-Example Slop: "Write a blog post about AI that isn't boring."
-
-Metabolize: Click Refine & Verify.
-
-The system detects ambiguity ("boring" is subjective) and missing schemas ("blog post" structure undefined).
-
-Review: The Governance Kernel generates a hardened artifact.
-
-Refined Artifact: Defines persona, tone parameters, specific structural requirements (H2 tags), and anti-hallucination constraints.
-
-Audit: Review the Integrity Score and Audit Log to see exactly what rules were applied.
-
-Export: Copy the JSON-formatted superprompt or download the signed Forensic Receipt.
-
-🔮 Roadmap
-v1.1 (The Team Update): Shared Governance Libraries for enterprise teams.
-
-v1.2 (The Agent Update): API access for integrating PromptForge as a middleware layer in autonomous agent swarms.
-
-v2.0 (The Federation Update): Cross-node consensus on prompt safety using the Tessrax Federation Protocol.
-
-🤝 Contributing
-We welcome contributions that adhere to the Tessrax Integrity Standards.
-
-Read CONTRIBUTING.md.
-
-Ensure all PRs include a Governance Impact Statement.
-
-Run scripts/verify_integrity.py before submitting.
-
-<p align="center"> <b>PromptForge</b> is a product of the <b>Tessrax Ecosystem</b>.
-
-<i>"Silence is Honesty. Verification is Truth."</i>
-
-</p>
+# AION Desktop (Tessrax Prime)
+
+AION Desktop is the Epistemic Firewall for local prompt forensics. The stack includes a FastAPI daemon, Tessrax governance engines, a ledgered receipt pipeline, and an Electron/Vue interface for drag-and-drop analysis.
+
+## Directory layout
+
+- `aiond/` – FastAPI daemon and protocol contracts
+- `proceduralist/` – File ingestion and hashing utilities
+- `tessrax/` – Governance, metabolism, and metrics modules
+- `ledger/` – Merkle tree and Ed25519 signing
+- `app/` – Electron + Vue frontend
+- `scripts/` – Bootstrap automation
+
+## Getting started
+
+1. **Bootstrap**
+   ```bash
+   python scripts/bootstrap.py
+   ```
+2. **Run the daemon**
+   ```bash
+   source .venv/bin/activate
+   python -m aiond.server.aiond --self-test
+   python -m aiond.server.aiond
+   ```
+3. **Start the desktop app**
+   ```bash
+   cd app
+   npm run dev
+   ```
+
+Drop a `.txt` file onto the UI to send it to the daemon. The response includes integrity score, entropy, contradictions, and a signed forensic receipt with the original file hash, Merkle root, and Ed25519 signature.
