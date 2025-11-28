@@ -13,6 +13,7 @@ def analyze_file(path: str) -> Dict:
     text, resolved_path = extract_text(path)
     file_hash = compute_sha256(str(resolved_path))
     contradictions = find_contradictions(text)
+    sorted_contradictions = sorted(contradictions)
 
     governance = GovernanceKernel()
     metrics = governance.evaluate(contradictions)
@@ -21,7 +22,7 @@ def analyze_file(path: str) -> Dict:
     receipt_payload = {
         "hash": file_hash,
         "merkle_root": merkle_root,
-        "contradictions": sorted(contradictions),
+        "contradictions": sorted_contradictions,
         "path": str(resolved_path),
     }
     signature = sign(json.dumps(receipt_payload, sort_keys=True).encode("utf-8"))
@@ -31,8 +32,7 @@ def analyze_file(path: str) -> Dict:
         "entropy": metrics["entropy"],
         "contradictions": contradictions,
         "receipt": {
-            "hash": file_hash,
-            "merkle_root": merkle_root,
+            **receipt_payload,
             "signature": signature,
         },
     }
